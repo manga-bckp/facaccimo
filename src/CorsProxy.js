@@ -1,6 +1,6 @@
 export default class CorsProxy {
 
-    static URL = 'https://cors.stirante.com';
+    static URL = 'https://cors-proxy-rgzs.onrender.com';
     static DEV_URL = 'http://localhost:3000';
 
     static get(url, headers) {
@@ -21,7 +21,10 @@ export default class CorsProxy {
         if (window.isElectron) {
             return undefined;
         }
-        if (process.env.NODE_ENV === 'development') {
+        if (
+            process.env.NODE_ENV === 'development' ||
+            window.location.hostname === 'localhost'
+        ) {
             return CorsProxy.DEV_URL;
         }
         return CorsProxy.URL;
